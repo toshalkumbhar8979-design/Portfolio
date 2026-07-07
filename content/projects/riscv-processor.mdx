@@ -1,0 +1,23 @@
+---
+title: "RISC-V (RV32I) 3-Stage Pipelined Processor"
+description: "Synthesisable RV32I 3-stage pipeline processor designed for Artix-7 FPGA (Basys 3)."
+repository: "toshalkumbhar8979-design/RISC-V-RV32I-Mini-Core"
+date: "2026-01-15"
+published: true
+---
+
+## Project Overview
+
+Designed a synthesisable RV32I 3-stage pipeline (Fetch/Decode/Execute) for Artix-7 FPGA.
+
+### Technical Specifications
+
+*   **Timing Closure:** Achieved WNS 14.42 ns and WHS 0.168 ns.
+*   **Power Profile:** 0.076 W via Vivado Power Analyzer.
+*   **Hardware Debugging:** Built a 16-bit register-to-LED ALU debug mapping for hardware-level validation.
+*   **Optimization:** Resolved logic pruning and LUT resource drop-off (21 → 300+) using `DONT_TOUCH` constraints.
+
+### Tools Used
+
+*   **HDL:** Verilog HDL
+*   **Platform:** Xilinx Vivado, Artix-7 FPGA (Basys 3)

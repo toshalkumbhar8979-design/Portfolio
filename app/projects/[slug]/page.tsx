@@ -4,9 +4,6 @@ import { Mdx } from "@/app/components/mdx";
 import { Header } from "./header";
 import "./mdx.css";
 import { ReportView } from "./view";
-import { Redis } from "@upstash/redis";
-
-export const dynamic = "force-dynamic";
 
 type Props = {
   params: {
@@ -22,13 +19,9 @@ export default async function PostPage({ params }: Props) {
     notFound();
   }
 
-  const redis = Redis.fromEnv();
-  const views =
-    (await redis.get<number>(["pageviews", "projects", slug].join(":"))) ?? 0;
-
   return (
     <div className="bg-zinc-50 min-h-screen">
-      <Header project={project} views={views} />
+      <Header project={project} />
       <ReportView slug={project.slug} />
 
       <article className="px-4 py-12 mx-auto prose prose-zinc prose-quoteless">

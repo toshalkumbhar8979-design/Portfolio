@@ -1,5 +1,5 @@
 "use client";
-import { ArrowLeft, Eye, Github, Twitter } from "lucide-react";
+import { ArrowLeft, Github, Globe } from "lucide-react";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 
@@ -10,24 +10,24 @@ type Props = {
 		description: string;
 		repository?: string;
 	};
-
-	views: number;
 };
-export const Header: React.FC<Props> = ({ project, views }) => {
+export const Header: React.FC<Props> = ({ project }) => {
 	const ref = useRef<HTMLElement>(null);
 	const [isIntersecting, setIntersecting] = useState(true);
 
-	const links: { label: string; href: string }[] = [];
+	const links: { label: string; href: string; icon: React.ReactNode }[] = [];
 	if (project.repository) {
 		links.push({
 			label: "GitHub",
 			href: `https://github.com/${project.repository}`,
+			icon: <Github size={24} />,
 		});
 	}
 	if (project.url) {
 		links.push({
 			label: "Website",
 			href: project.url,
+			icon: <Globe size={24} />,
 		});
 	}
 	useEffect(() => {
@@ -54,29 +54,7 @@ export const Header: React.FC<Props> = ({ project, views }) => {
 			>
 				<div className="container flex flex-row-reverse items-center justify-between p-6 mx-auto">
 					<div className="flex justify-between gap-8">
-						<span
-							title="View counter for this page"
-							className={`duration-200 hover:font-medium flex items-center gap-1 ${
-								isIntersecting
-									? " text-zinc-400 hover:text-zinc-100"
-									: "text-zinc-600 hover:text-zinc-900"
-							} `}
-						>
-							<Eye className="w-5 h-5" />{" "}
-							{Intl.NumberFormat("en-US", { notation: "compact" }).format(
-								views,
-							)}
-						</span>
-						<Link target="_blank" href="https://twitter.com/chronark_">
-							<Twitter
-								className={`w-6 h-6 duration-200 hover:font-medium ${
-									isIntersecting
-										? " text-zinc-400 hover:text-zinc-100"
-										: "text-zinc-600 hover:text-zinc-900"
-								} `}
-							/>
-						</Link>
-						<Link target="_blank" href="https://github.com/chronark">
+						<Link target="_blank" href="https://github.com/toshalkumbhar8979-design">
 							<Github
 								className={`w-6 h-6 duration-200 hover:font-medium ${
 									isIntersecting
@@ -105,16 +83,26 @@ export const Header: React.FC<Props> = ({ project, views }) => {
 						<h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl font-display">
 							{project.title}
 						</h1>
-						<p className="mt-6 text-lg leading-8 text-zinc-300">
+						<p className="mt-6 text-lg leading-8 text-zinc-300 font-sans">
 							{project.description}
 						</p>
 					</div>
 
 					<div className="mx-auto mt-10 max-w-2xl lg:mx-0 lg:max-w-none">
-						<div className="grid grid-cols-1 gap-y-6 gap-x-8 text-base font-semibold leading-7 text-white sm:grid-cols-2 md:flex lg:gap-x-10">
+						<div className="flex flex-row items-center justify-center gap-8 text-white">
 							{links.map((link) => (
-								<Link target="_blank" key={link.label} href={link.href}>
-									{link.label} <span aria-hidden="true">&rarr;</span>
+								<Link
+									target="_blank"
+									key={link.label}
+									href={link.href}
+									className="flex flex-col items-center gap-2 group duration-500 hover:text-zinc-300"
+								>
+									<span className="p-2 border rounded-full border-zinc-500 group-hover:border-zinc-200">
+										{link.icon}
+									</span>
+									<span className="text-xs font-semibold tracking-wider uppercase">
+										{link.label}
+									</span>
 								</Link>
 							))}
 						</div>

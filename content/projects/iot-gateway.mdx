@@ -1,0 +1,23 @@
+---
+title: "Smart IoT Edge Gateway Platform"
+description: "MQTT-based edge gateway performing real-time statistical anomaly detection on IoT sensor telemetry."
+repository: "toshalkumbhar8979-design/Smart-IoT-Edge-Gateway"
+date: "2026-06-01"
+published: true
+---
+
+## Project Overview
+
+Designed an MQTT-based edge gateway performing real-time statistical anomaly detection (rolling-window z-score) on simulated IoT sensor telemetry, avoiding the cost of streaming raw data to the cloud.
+
+### Key Innovations
+
+*   **Traffic Reduction:** Cut cloud-bound traffic by **~80%** by forwarding only aggregated summaries and anomaly events instead of raw readings.
+*   **Offline Persistence:** Implemented thread-safe local SQLite persistence as an offline buffer for reliable data handling.
+*   **Live Dashboard:** Built a Flask + Chart.js dashboard for live visualisation; injected anomalies were detected and surfaced within seconds.
+
+### Skills Applied
+
+*   **Communication:** MQTT
+*   **Backend:** Python, Flask, SQLite
+*   **Frontend:** Chart.js
