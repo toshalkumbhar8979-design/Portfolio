@@ -1,0 +1,19 @@
+---
+title: "Imitation Learning-Based Autonomous Robotic Arm"
+description: "Robotic actuation, kinematics, and imitation learning platform with a real-time digital twin and ROS 2 integration."
+repository: "toshalkumbhar8979-design/Robotic-Arm"
+date: "2026-06-01"
+published: true
+---
+
+## Project Overview
+
+Engineered a custom 6-DOF robotic manipulator from June 2026, driven by an Arduino Uno and PCA9685 PWM driver over I2C.
+
+### Contributions
+
+* Implemented a 115200-baud binary serial protocol with a 500 ms watchdog for fail-safe actuation.
+* Built a FastAPI and WebSockets control system streaming at 30 Hz, with a 3D URDF digital twin and live switching between Cartesian inverse kinematics and direct joint control.
+* Applied an EMA low-pass filter with S-curve cosine velocity interpolation to guarantee zero-jerk motion across all six servo axes.
+* Recorded and exported 250+ teleoperated demonstration episodes through a PS5 DualSense controller for PyTorch behavior-cloning imitation learning.
+* Extended the system with ROS 2, MoveIt, and Gazebo for live remote control of the physical arm through its simulated digital twin.

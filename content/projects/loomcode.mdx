@@ -1,0 +1,31 @@
+---
+title: "LoomCode"
+description: "AI coding agent for the terminal with 180+ models, a 60fps SolidJS terminal UI, and a vision-driven desktop-control layer."
+url: "https://loomcluster.in"
+repository: "toshalkumbhar8979-design/loomcode"
+published: true
+---
+
+## Project Overview
+
+Designed and built LoomCode, a production-ready AI coding agent for the terminal with a multi-provider engine supporting Anthropic, OpenAI-compatible providers, NVIDIA NIM, Gemini, and Ollama across 180+ models. Providers can be switched mid-session while streaming tool loops, subagent delegation, and MCP server integrations continue running.
+
+### Terminal Experience
+
+* Built a custom terminal UI from scratch with SolidJS and OpenTUI, using a 60fps renderer.
+* Added slash commands, inline diffs, plan/build/chat modes, a command palette, and mouse support.
+
+### Loom Computer
+
+* Shipped a vision-driven desktop-control layer using the LOOK, THINK, ACT, VERIFY agent loop.
+* Added screen understanding for vision and non-vision models, input injection, blue-ripple action visualisation, and safety rails including a panic hotkey, password-manager blocking, action caps, a stuck watchdog, and a full audit trail.
+
+### Production Readiness
+
+* Implemented per-tool and path-glob permission controls with allow, ask, and deny modes.
+* Added commit-pinned remote skills, budget and cost tracking, and 221 automated tests gating every push.
+* Published to npm with a bundled Bun runtime for zero-setup installation:
+
+```bash
+npm install -g loom-agent
+```
