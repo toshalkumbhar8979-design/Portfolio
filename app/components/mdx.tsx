@@ -1,8 +1,8 @@
 // @ts-nocheck
-import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { getMDXComponent } from "next-contentlayer/hooks";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 function clsx(...args: any) {
 	return args.filter(Boolean).join(" ");
@@ -164,15 +164,15 @@ const components = {
 };
 
 interface MdxProps {
-	code: string;
+	raw: string;
 }
 
-export function Mdx({ code }: MdxProps) {
-	const Component = getMDXComponent(code);
-
+export function Mdx({ raw }: MdxProps) {
 	return (
 		<div className="mdx">
-			<Component components={components} />
+			<ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>
+				{raw}
+			</ReactMarkdown>
 		</div>
 	);
 }
