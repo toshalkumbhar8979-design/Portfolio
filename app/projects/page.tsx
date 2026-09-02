@@ -8,7 +8,7 @@ import { Article } from "./article";
 export default async function ProjectsPage() {
   const featured = allProjects.find((project) => project.slug === "robotic-manipulator") || allProjects[0];
   const top2 = allProjects.find((project) => project.slug === "edgeguard-5g") || allProjects[1];
-  const top3 = allProjects.find((project) => project.slug === "riscv-processor") || allProjects[2];
+  const top3 = allProjects.find((project) => project.slug === "riscv-doom-soc") || allProjects[2];
   
   const certificates = allProjects.filter((p) => p.slug.startsWith("cert-"));
   

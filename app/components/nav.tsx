@@ -3,9 +3,15 @@ import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 
-export const Navigation: React.FC = () => {
+type NavigationProps = {
+	showCredits?: boolean;
+};
+
+export const Navigation: React.FC<NavigationProps> = ({ showCredits = false }) => {
 	const ref = useRef<HTMLElement>(null);
+	const creditsRef = useRef<HTMLDivElement>(null);
 	const [isIntersecting, setIntersecting] = useState(true);
+	const [creditsOpen, setCreditsOpen] = useState(false);
 
 	useEffect(() => {
 		if (!ref.current) return;
@@ -16,6 +22,19 @@ export const Navigation: React.FC = () => {
 		observer.observe(ref.current);
 		return () => observer.disconnect();
 	}, []);
+
+	useEffect(() => {
+		if (!creditsOpen) return;
+
+		function closeCredits(event: MouseEvent) {
+			if (!creditsRef.current?.contains(event.target as Node)) {
+				setCreditsOpen(false);
+			}
+		}
+
+		document.addEventListener("mousedown", closeCredits);
+		return () => document.removeEventListener("mousedown", closeCredits);
+	}, [creditsOpen]);
 
 	return (
 		<header ref={ref}>
@@ -40,6 +59,39 @@ export const Navigation: React.FC = () => {
 						>
 							Contact
 						</Link>
+						{showCredits && (
+							<div ref={creditsRef} className="relative">
+								<button
+									type="button"
+									aria-expanded={creditsOpen}
+									aria-controls="credits-popover"
+									onClick={() => setCreditsOpen((open) => !open)}
+									className="duration-200 text-zinc-400 hover:text-zinc-100"
+								>
+									Credits
+								</button>
+								{creditsOpen && (
+									<div
+										id="credits-popover"
+										role="dialog"
+										aria-label="Template credits"
+										className="absolute right-0 top-full z-50 mt-3 w-64 border border-zinc-700 bg-zinc-950/95 p-4 text-sm text-zinc-300 shadow-xl backdrop-blur"
+									>
+										<p>
+											This portfolio is based on the{" "}
+											<Link
+												href="https://github.com/chronark/chronark.com"
+												target="_blank"
+												rel="noreferrer"
+												className="text-white underline underline-offset-4 hover:text-zinc-400"
+											>
+												Chronark template
+											</Link>
+										</p>
+									</div>
+								)}
+							</div>
+						)}
 					</div>
 
 					<Link

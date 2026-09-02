@@ -1,0 +1,31 @@
+---
+title: "RISC-V RV32IM SoC with RTL to GDS-II Sign-off"
+description: "A complete open RISC-V system-on-chip designed, verified, and taken through a DRC-clean GDS-II layout on SkyWater 130 nm."
+repository: "toshalkumbhar8979-design/RISC-V-RV32IM-SoC-"
+date: "2026-08-22"
+published: true
+---
+
+## Project Overview
+
+Designed a RISC-V RV32IM system-on-chip from scratch, including a 2-stage pipelined core with the M-extension, CSRs, interrupts, and a complete peripheral set. The SoC boots software from QSPI flash and provides a DOOM-compatible platform, then passes through the complete OpenLane 2 physical-design flow on SkyWater 130 nm.
+
+## Key Highlights
+
+*   **RV32IM Core:** Built a Verilog-2001 2-stage pipeline with multiply/divide, CSR and trap/mret support, and timer interrupts. Self-checking testbenches pass both the core and M-extension unit tests.
+*   **SoC Integration:** Connected BootROM, 32 KB SRAM, QSPI flash XIP, SPI-TFT (ILI9341), UART, and mtime/mtimecmp. The end-to-end SoC test passes boot, flash copy, display pattern, timer IRQ, and PASS mailbox checks.
+*   **Software Stack:** Built the GNU RISC-V cross-compiler flow, linker script, crt0, platform HAL, and `doomgeneric` bindings for a C demo that boots and runs on the SoC.
+*   **RTL to GDS-II:** Ran synthesis, placement, CTS, routing, DRC, LVS, and GDS-II export with OpenLane 2 and the volare SkyWater 130 nm PDK. The probe design closed with 0 DRC violations, 0 LVS mismatches, timing met at 20 ns, 18,267 cells, 0.28 mm² area, 8.3 mW power, and +8.8 ns setup slack.
+*   **Full-SoC Synthesis:** Reached 68,690 cells and 0.916 mm², with 43% sequential logic, through CTS with 1,952 clock subnets and WNS of 0.
+
+## Technology Stack
+
+Verilog, RISC-V, Icarus Verilog, GNU RISC-V toolchain, Yosys, OpenROAD, OpenLane 2, SkyWater 130 nm, Magic, KLayout, Netgen, QSPI, UART, SPI-TFT, and WSL2.
+
+## Project Documentation
+
+[Read the project paper](https://drive.google.com/file/d/1LuWkrK-gQlqWzloCvj7BRWznMQ1FX8mW/view?usp=sharing)
+
+## Further Work
+
+OpenRAM hard-macro integration for the SRAM, full-corner timing closure, and FPGA board bring-up.
