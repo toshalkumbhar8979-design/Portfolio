@@ -6,13 +6,13 @@ import "./mdx.css";
 import { ReportView } from "./view";
 
 type Props = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
 export default async function PostPage({ params }: Props) {
-  const slug = params?.slug;
+  const { slug } = await params;
   const project = allProjects.find((project) => project.slug === slug);
 
   if (!project) {
