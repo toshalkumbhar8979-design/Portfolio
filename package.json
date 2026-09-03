@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "deploy": "opennextjs-cloudflare build && wrangler deploy",
+    "cf:build": "opennextjs-cloudflare build",
+    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
     "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
     "start": "next start",
     "fmt": "pnpm rome check . --apply-unsafe && pnpm rome format . --write"
