@@ -41,9 +41,6 @@ export const metadata: Metadata = {
     title: "Toshal Kumbhar",
     card: "summary_large_image",
   },
-  icons: {
-    shortcut: "/favicon.png",
-  },
 };
 const inter = Inter({
   subsets: ["latin"],

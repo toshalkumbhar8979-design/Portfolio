@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <!-- Black background with rounded corners -->
+  <rect width="32" height="32" rx="7" fill="#000000" />
+
+  <!-- Subtle inner border -->
+  <rect x="0.5" y="0.5" width="31" height="31" rx="6.5" fill="none" stroke="#27272a" stroke-width="1" />
+
+  <!-- Centered White Letter 'T' -->
+  <text
+    x="16"
+    y="17"
+    dominant-baseline="central"
+    text-anchor="middle"
+    fill="#ffffff"
+    font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+    font-size="19"
+    font-weight="700">T</text>
+</svg>
