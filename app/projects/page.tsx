@@ -6,17 +6,13 @@ import { Card } from "../components/card";
 import { Article } from "./article";
 
 export default async function ProjectsPage() {
-    const featured = allProjects.find((project) => project.slug === "loomcode") || allProjects[0];
+  const featured = allProjects.find((project) => project.slug === "loomcode") || allProjects[0];
   const top2 = allProjects.find((project) => project.slug === "edgeguard-5g") || allProjects[1];
   const top3 = allProjects.find((project) => project.slug === "riscv-doom-soc") || allProjects[2];
   
-  const certificates = allProjects.filter((p) => p.slug.startsWith("cert-"));
-    const academicProjects = allProjects.filter(
-      (project) => project.published && project.category === "Industry - Academic Project",
-    );
-  const featuredHref = featured.repository
-    ? `/projects/${featured.slug}`
-    : featured.url || `/projects/${featured.slug}`;
+  const academicProjects = allProjects.filter(
+    (project) => project.published && project.category === "Industry - Academic Project",
+  );
   
   const sorted = allProjects
     .filter((p) => p.published)
@@ -25,7 +21,7 @@ export default async function ProjectsPage() {
         project.slug !== featured.slug &&
         project.slug !== top2.slug &&
         project.slug !== top3.slug &&
-	        project.category !== "Industry - Academic Project" &&
+        project.category !== "Industry - Academic Project" &&
         !project.slug.startsWith("cert-"),
     )
     .sort(() => Math.random() - 0.5);
@@ -46,7 +42,7 @@ export default async function ProjectsPage() {
 
         <div className="grid grid-cols-1 gap-8 mx-auto lg:grid-cols-2 ">
           <Card>
-            <Link href={featuredHref} target={featured.repository ? undefined : featured.url ? "_blank" : undefined}>
+            <Link href={featured.url ? featured.url : `/projects/${featured.slug}`} target={featured.url ? "_blank" : undefined}>
               <article className="relative w-full h-full p-4 md:p-8">
                 <div className="flex items-center justify-between gap-2">
                   <div className="text-xs text-zinc-100 font-sans">
@@ -121,35 +117,16 @@ export default async function ProjectsPage() {
           </div>
         </div>
 
-    {academicProjects.length > 0 && (
-      <>
-      <div className="w-full h-px bg-zinc-800" />
-      <div className="max-w-2xl mx-auto lg:mx-0">
-        <h2 className="text-3xl font-bold tracking-tight text-zinc-100 sm:text-4xl font-display">
-        Industry - Academic Project
-        </h2>
-      </div>
-      <div className="grid grid-cols-1 gap-4 mx-auto lg:mx-0 md:grid-cols-3">
-        {academicProjects.map((project) => (
-        <Card key={project.slug}>
-          <Article project={project} />
-        </Card>
-        ))}
-      </div>
-      </>
-    )}
-
-        {/* Certificates Section */}
-        {certificates.length > 0 && (
+        {academicProjects.length > 0 && (
           <>
             <div className="w-full h-px bg-zinc-800" />
             <div className="max-w-2xl mx-auto lg:mx-0">
               <h2 className="text-3xl font-bold tracking-tight text-zinc-100 sm:text-4xl font-display">
-                Certifications
+                Industry - Academic Project
               </h2>
             </div>
             <div className="grid grid-cols-1 gap-4 mx-auto lg:mx-0 md:grid-cols-3">
-              {certificates.map((project) => (
+              {academicProjects.map((project) => (
                 <Card key={project.slug}>
                   <Article project={project} />
                 </Card>
@@ -157,6 +134,7 @@ export default async function ProjectsPage() {
             </div>
           </>
         )}
+
       </div>
     </div>
   );
