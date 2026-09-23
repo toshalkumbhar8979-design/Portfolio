@@ -1,9 +1,10 @@
 "use client";
-import { ArrowLeft, Github, Globe } from "lucide-react";
+import { ArrowLeft, Github, Globe, X } from "lucide-react";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 
 type Props = {
+	slug: string;
 	project: {
 		url?: string;
 		title: string;
@@ -11,9 +12,12 @@ type Props = {
 		repository?: string;
 	};
 };
-export const Header: React.FC<Props> = ({ project }) => {
+export const Header: React.FC<Props> = ({ project, slug }) => {
 	const ref = useRef<HTMLElement>(null);
+	const closeButtonRef = useRef<HTMLButtonElement>(null);
 	const [isIntersecting, setIntersecting] = useState(true);
+	const [isVideoOpen, setIsVideoOpen] = useState(false);
+	const hasProjectVideo = slug === "imitation-learning-robotic-arm";
 
 	const links: { label: string; href: string; icon: React.ReactNode }[] = [];
 	if (project.repository) {
@@ -39,6 +43,20 @@ export const Header: React.FC<Props> = ({ project }) => {
 		observer.observe(ref.current);
 		return () => observer.disconnect();
 	}, []);
+
+	useEffect(() => {
+		if (!isVideoOpen) return;
+		closeButtonRef.current?.focus();
+		const handleKeyDown = (event: KeyboardEvent) => {
+			if (event.key === "Escape") setIsVideoOpen(false);
+		};
+		document.addEventListener("keydown", handleKeyDown);
+		document.body.style.overflow = "hidden";
+		return () => {
+			document.removeEventListener("keydown", handleKeyDown);
+			document.body.style.overflow = "";
+		};
+	}, [isVideoOpen]);
 
 	return (
 		<header
@@ -90,6 +108,32 @@ export const Header: React.FC<Props> = ({ project }) => {
 
 					<div className="mx-auto mt-10 max-w-2xl lg:mx-0 lg:max-w-none">
 						<div className="flex flex-row items-center justify-center gap-8 text-white">
+							{hasProjectVideo && (
+								<button
+									type="button"
+									onClick={() => setIsVideoOpen(true)}
+									className="flex flex-col items-center gap-2 group duration-500 hover:text-zinc-300"
+									aria-haspopup="dialog"
+								>
+									<span className="rounded-full border border-zinc-500 p-2 transition-colors group-hover:border-zinc-200 group-focus-within:border-zinc-200">
+										<svg
+											width="24"
+											height="24"
+											viewBox="0 0 640 640"
+											aria-hidden="true"
+											focusable="false"
+										>
+											<path
+												fill="currentColor"
+												d="M187.2 100.9C174.8 94.1 159.8 94.4 147.6 101.6C135.4 108.8 128 121.9 128 136L128 504C128 518.1 135.5 531.2 147.6 538.4C159.7 545.6 174.8 545.9 187.2 539.1L523.2 355.1C536 348.1 544 334.6 544 320C544 305.4 536 291.9 523.2 284.9L187.2 100.9z"
+											/>
+										</svg>
+									</span>
+									<span className="text-xs font-semibold tracking-wider uppercase">
+										Project video
+									</span>
+								</button>
+							)}
 							{links.map((link) => (
 								<Link
 									target="_blank"
@@ -109,6 +153,42 @@ export const Header: React.FC<Props> = ({ project }) => {
 					</div>
 				</div>
 			</div>
+
+			{hasProjectVideo && isVideoOpen && (
+				<div
+					className="fixed inset-0 z-[100] flex items-center justify-center bg-zinc-950/85 p-4 backdrop-blur-sm"
+					role="dialog"
+					aria-modal="true"
+					aria-labelledby="project-video-title"
+					onMouseDown={(event) => {
+						if (event.target === event.currentTarget) setIsVideoOpen(false);
+					}}
+				>
+					<div className="relative w-full max-w-5xl overflow-hidden rounded-xl border border-zinc-600 bg-zinc-900 shadow-2xl shadow-black/50">
+						<div className="flex items-center justify-between border-b border-zinc-700 px-4 py-3 sm:px-6">
+							<h2 id="project-video-title" className="font-display text-sm font-semibold text-zinc-100 sm:text-base">
+								Project video
+							</h2>
+							<button
+								ref={closeButtonRef}
+								type="button"
+								onClick={() => setIsVideoOpen(false)}
+								className="rounded-full p-2 text-zinc-400 transition-colors hover:bg-zinc-800 hover:text-white focus:outline-none focus:ring-2 focus:ring-zinc-300"
+								aria-label="Close project video"
+							>
+								<X size={20} />
+							</button>
+						</div>
+						<iframe
+							className="aspect-video w-full border-0 bg-zinc-950"
+							src="https://drive.google.com/file/d/1v6YYx8oilNhYG7eOzeoTNrJiH-5SRr5P/preview?autoplay=1"
+							title="Imitation learning robotic arm project video"
+							allow="autoplay; fullscreen"
+							allowFullScreen
+						/>
+					</div>
+				</div>
+			)}
 		</header>
 	);
 };
