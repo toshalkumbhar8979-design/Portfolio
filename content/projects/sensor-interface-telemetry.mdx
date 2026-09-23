@@ -1,0 +1,23 @@
+---
+title: "Sensor Interface & Telemetry Logging Framework"
+description: "Modular microcontroller firmware, binary telemetry logging, and offline analysis tools for sensor bring-up and validation."
+date: "2026-03-01"
+published: true
+---
+
+## Project Overview
+
+Built a modular C/C++ firmware and analysis framework for interfacing sensors, streaming telemetry, and validating control logic during hardware bring-up.
+
+### Peripheral Drivers & Telemetry
+
+*   **Sensor Interfaces:** Connected proximity, optical, and IMU-class sensors over I2C and UART with configurable sampling and non-blocking reads.
+*   **Binary Logging:** Implemented a lightweight telemetry logger that streamed timestamped sensor data and status flags to a host over serial for live monitoring and offline post-processing.
+*   **Offline Analysis:** Wrote Python tools to parse field-style logs, compute statistics, detect anomalies, and visualize trends during bring-up and validation.
+*   **Software-in-the-Loop Testing:** Added harnesses that replayed recorded logs against control logic to verify edge-case handling and fault containment without physical hardware.
+
+### Skills Applied
+
+*   **Firmware:** C, C++, microcontroller peripherals
+*   **Communication:** I2C, UART, serial telemetry
+*   **Analysis:** Python, statistical analysis, anomaly detection, data visualization
