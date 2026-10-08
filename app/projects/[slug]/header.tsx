@@ -1,7 +1,8 @@
 "use client";
-import { ArrowLeft, Github, Globe, X } from "lucide-react";
+import { ArrowLeft, FileText, Github, Globe, X } from "lucide-react";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
+import { ProjectGallery } from "./gallery";
 
 type Props = {
 	slug: string;
@@ -32,6 +33,13 @@ export const Header: React.FC<Props> = ({ project, slug }) => {
 			label: "Website",
 			href: project.url,
 			icon: <Globe size={24} />,
+		});
+	}
+	if (slug === "ember-gpu") {
+		links.push({
+			label: "Documentation",
+			href: `/projects/${slug}#project-documentation`,
+			icon: <FileText size={24} />,
 		});
 	}
 	useEffect(() => {
@@ -136,9 +144,9 @@ export const Header: React.FC<Props> = ({ project, slug }) => {
 							)}
 							{links.map((link) => (
 								<Link
-									target="_blank"
 									key={link.label}
 									href={link.href}
+									target={link.label === "Documentation" ? undefined : "_blank"}
 									className="flex flex-col items-center gap-2 group duration-500 hover:text-zinc-300"
 								>
 									<span className="p-2 border rounded-full border-zinc-500 group-hover:border-zinc-200">
@@ -149,6 +157,7 @@ export const Header: React.FC<Props> = ({ project, slug }) => {
 									</span>
 								</Link>
 							))}
+							{slug === "ember-gpu" && <ProjectGallery />}
 						</div>
 					</div>
 				</div>

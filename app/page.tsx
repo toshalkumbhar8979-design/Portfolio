@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import Particles from "./components/particles";
+import { PageMascot } from "./components/page-mascot";
 
 const navigation = [
   { name: "Projects", href: "/projects" },
@@ -37,6 +38,9 @@ export default function Home() {
         <h2 className="text-sm text-zinc-500 font-sans">
           B.Tech in Electronics and Communication Engineering student at MIT World Peace University. Passionate about Embedded System, Radio Access Networks (RAN), FPGA, Robotics.
         </h2>
+      </div>
+      <div className="fixed left-6 top-6 z-20 animate-fade-in sm:left-8 sm:top-8">
+        <PageMascot />
       </div>
     </div>
   );

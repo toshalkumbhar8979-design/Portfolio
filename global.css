@@ -14,5 +14,28 @@
   .text-edge-outline {
     -webkit-text-stroke: 1px rgba(255,255,255,0.3);
   }
-} 
 
+  * {
+    scrollbar-color: rgb(82 82 91) rgb(24 24 27);
+    scrollbar-width: thin;
+  }
+
+  *::-webkit-scrollbar {
+    width: 0.625rem;
+    height: 0.625rem;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: rgb(24 24 27);
+  }
+
+  *::-webkit-scrollbar-thumb {
+    border: 2px solid rgb(24 24 27);
+    border-radius: 9999px;
+    background: rgb(82 82 91);
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background: rgb(113 113 122);
+  }
+}

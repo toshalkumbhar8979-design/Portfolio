@@ -1,0 +1,35 @@
+---
+title: "EMBER GPU"
+description: "A GPU designed from scratch: custom rasterization, floating-point, tensor, and compute hardware, verified in simulation and taken through routed SkyWater 130 nm layouts."
+repository: "toshalkumbhar8979-design"
+date: "2026-10-08"
+published: true
+---
+
+## Project Overview
+
+I built a GPU from scratch. Not a simulation of a GPU — an actual chip design: my own rasterizer, my own floating-point unit, my own instruction set, and my own tensor core. The RTL runs graphics and inference demos in simulation, and several blocks now have routed, DRC-checked GDS layouts.
+
+The entire project was built on one Windows/WSL machine using an open-source toolchain.
+
+![EMBER GPU architecture diagram](/projects/ember-gpu/architecture.png)
+
+## Hardware Architecture
+
+* **Command processor:** A command processor with DMA and fences, driving everything through one AXI4-Lite bus.
+* **Rasterizer:** A multi-cycle rasterizer with a Z-buffer, CLUT textures, alpha blending, and dithering — the whole PS1-era output stage implemented in logic.
+* **Vector FPU:** A four-lane IEEE-754 fp32 vector FPU written from the gates up, with round-to-nearest-even, subnormal, and NaN handling. Getting the rounding modes right took two weeks and taught me more about floating point than any course.
+* **Tensor core:** A 16×16 int8 systolic tensor array that runs a real CNN. A trained LeNet reads an actual MNIST digit and names it, reaching 98% accuracy, with RTL byte-for-byte identical to the software model.
+* **Compute core:** A four-thread compute core with its own 32-bit ISA and assembler runs the game's physics. The camera walking through the temple is integrated every frame by instructions the GPU executes itself.
+
+## Verification
+
+The verification suite passes 31/31 tests against independent Python golden models, bit-exact — every pixel and every byte of every layer.
+
+## RTL to GDS-II
+
+The RTL-to-layout flow uses sv2v, Yosys, OpenROAD, Magic, and KLayout on the open SkyWater 130 nm process. The blocks go through floorplanning, placement, clock-tree synthesis, detailed routing, design-rule checking, and GDS-II export, producing real polygons a foundry tool can open.
+
+## Project Documentation
+
+Source code and project updates are available on [GitHub](https://github.com/toshalkumbhar8979-design). Project images and routed-layout views will be added to the gallery as they are ready.

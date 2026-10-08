@@ -20,7 +20,7 @@ export const Article: React.FC<Props> = ({ project }) => {
 								)}
 							</time>
 						) : (
-							<span>SOON</span>
+							<span>{project.slug === "loomcode" ? "LIVE" : "SOON"}</span>
 						)}
 					</span>
 				</div>
