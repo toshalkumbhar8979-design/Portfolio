@@ -80,7 +80,11 @@ export const Header: React.FC<Props> = ({ project, slug }) => {
 			>
 				<div className="container flex flex-row-reverse items-center justify-between p-6 mx-auto">
 					<div className="flex justify-between gap-8">
-						<Link target="_blank" href="https://github.com/toshalkumbhar8979-design">
+						<Link
+							target="_blank"
+							rel="noopener noreferrer"
+							href="https://github.com/toshalkumbhar8979-design"
+						>
 							<Github
 								className={`w-6 h-6 duration-200 hover:font-medium ${
 									isIntersecting

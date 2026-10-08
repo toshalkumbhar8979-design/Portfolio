@@ -4,23 +4,22 @@
   "private": true,
   "packageManager": "pnpm@10.18.2",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "cf:build": "opennextjs-cloudflare build",
-    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
-    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "content:generate": "node scripts/generate-projects.mjs",
+    "dev": "node scripts/watch-projects.mjs",
+    "build": "pnpm content:generate && next build",
+    "cf:build": "pnpm content:generate && opennextjs-cloudflare build",
+    "deploy": "pnpm content:generate && opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+    "preview": "pnpm content:generate && opennextjs-cloudflare build && opennextjs-cloudflare preview",
     "start": "next start",
     "fmt": "pnpm rome check . --apply-unsafe && pnpm rome format . --write"
   },
   "dependencies": {
-    "@next/mdx": "15.5.24",
+    "@next/mdx": "15.5.27",
     "@upstash/redis": "1.36.4",
-    "contentlayer": "0.3.4",
     "framer-motion": "10.18.0",
     "lucide-react": "0.284.0",
     "markdown-wasm": "1.2.0",
-    "next": "15.5.24",
-    "next-contentlayer": "0.3.4",
+    "next": "15.5.27",
     "page-mascot": "^0.1.0",
     "pnpm": "^10.34.4",
     "react": "18.3.1",
@@ -43,11 +42,32 @@
     "@types/react": "18.3.28",
     "@types/react-dom": "18.3.7",
     "autoprefixer": "10.4.27",
-    "postcss": "8.5.8",
+    "postcss": "8.5.29",
     "postcss-nesting": "12.1.5",
     "rome": "12.1.3",
     "tailwindcss": "3.4.19",
     "tailwindcss-debug-screens": "2.2.1",
+    "yaml": "2.9.1",
     "wrangler": "4.128.0"
+  },
+  "pnpm": {
+    "patchedDependencies": {
+      "braces@3.0.3": "patches/braces@3.0.3.patch"
+    },
+    "overrides": {
+      "baseline-browser-mapping": "^2.11.0",
+      "brace-expansion@^2.0.0": "^2.1.7",
+      "brace-expansion@^5.0.0": "^5.0.12",
+      "browserslist": "^4.28.7",
+      "nanoid@^3.0.0": "^3.3.18",
+      "picomatch": "^2.3.2",
+      "postcss": "^8.5.23",
+      "postcss-selector-parser": "^7.1.6",
+      "proxy-addr": "^2.0.8",
+      "sharp": "^0.35.5",
+      "source-map-js": "^1.2.2",
+      "undici": "^7.29.1",
+      "yaml": "^2.8.3"
+    }
   }
 }

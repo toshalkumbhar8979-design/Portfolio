@@ -1,0 +1,186 @@
+[
+  {
+    "slug": "bharat-forge",
+    "title": "Bharat Forge Aerospace",
+    "description": "Automated Blade Inspection Station using electromechanical automation, industrial communication, HMI, and computer vision.",
+    "published": true,
+    "body": {
+      "raw": "\n## Project Overview\n\nAutomation and Sensor Integration academic project conducted at **Bharat Forge Aerospace** in Pune, India from April 2026 to July 2026.\n\n### Contributions\n\n*   **Electromechanical Design:** Translated 3D CAD layouts into a fully operational electromechanical system architecture.\n*   **Sensor Selection:** Selected proximity, optical, and thickness sensors/actuators against strict aerospace tolerance requirements via datasheet evaluation.\n*   **I/O Mapping & Communication:** Configured hardware I/O mapping and CAN and EtherCAT communication protocols.\n*   **HMI Development:** Programmed WinCC and ISPSoft/DOPSoft HMI layouts for real-time sensor visualisation, fault detection, and alarm handling.\n*   **Defect Detection:** Built a two-stage pipeline using YOLO for blade-body localisation and HRNet for pixel-level scratch and surface-defect segmentation within the detected blade region.\n"
+    },
+    "date": "2026-04-15T00:00:00.000Z",
+    "category": "Industry - Academic Project"
+  },
+  {
+    "slug": "board-bring-up-peripheral-validation",
+    "title": "Board Bring-Up & Peripheral Driver Validation",
+    "description": "Hardware-software co-design project covering Arduino-class MCU bring-up, low-level drivers, and repeatable validation routines.",
+    "published": true,
+    "body": {
+      "raw": "\n## Project Overview\n\nPerformed board bring-up and peripheral driver validation on an Arduino-class microcontroller platform, with an emphasis on timing, fault recovery, and repeatable debugging.\n\n### Bring-Up & Driver Development\n\n*   **Board Bring-Up:** Verified power rails, clocks, and peripheral connectivity using a multimeter and logic-level checks.\n*   **Low-Level Drivers:** Wrote and debugged drivers for GPIO, timers, PWM, I2C, and UART.\n*   **Timing Validation:** Validated timing accuracy and interrupt latency under varying system loads.\n*   **Fault Handling:** Created unit-test-style validation routines covering driver edge cases, error paths, and recovery behavior.\n*   **Documentation:** Documented the bring-up sequence and known failure modes for repeatable validation.\n\n### Skills Applied\n\n*   **Embedded Systems:** C/C++, Arduino-class microcontrollers\n*   **Peripherals:** GPIO, timers, PWM, I2C, UART\n*   **Validation:** Hardware debugging, timing analysis, unit-test-style routines\n"
+    },
+    "date": "2026-01-01T00:00:00.000Z"
+  },
+  {
+    "slug": "cert-aws",
+    "title": "AWS Certified Cloud Practitioner",
+    "description": "Validation of cloud fluency and foundational AWS knowledge.",
+    "published": true,
+    "body": {
+      "raw": "\nProfessional certification from Amazon Web Services (AWS) demonstrating knowledge of cloud concepts, security, technology, and billing.\n"
+    },
+    "date": "2026-06-15T00:00:00.000Z",
+    "url": "https://www.credly.com/badges/5b4dd633-b8f6-4705-a656-39065644b2a9/public_url"
+  },
+  {
+    "slug": "cert-google-adk",
+    "title": "Google ADK Certification",
+    "description": "Advanced certification in Google ADK development.",
+    "published": true,
+    "body": {
+      "raw": "\nGoogle certification for Android Open Accessory Development Kit (ADK), focusing on hardware-software integration.\n"
+    },
+    "date": "2026-06-20T00:00:00.000Z",
+    "url": "https://www.credly.com/badges/8b6beb8d-5d9b-4588-8e2a-c0faf71227f9/public_url"
+  },
+  {
+    "slug": "cert-jj",
+    "title": "Johnson & Johnson Job Simulation",
+    "description": "Completed professional job simulation via Forage.",
+    "published": true,
+    "body": {
+      "raw": "\nProfessional job simulation certificate from Johnson & Johnson, demonstrating skills in relevant engineering or business domains.\n"
+    },
+    "date": "2026-06-25T00:00:00.000Z",
+    "url": "https://www.theforage.com/completion-certificates/3w79S9RRBtn9noDWZ/q8m3gpN4ETXnjapPq_3w79S9RRBtn9noDWZ_6a0ebe1067634f943c8e9a15_1779377725200_completion_certificate.pdf"
+  },
+  {
+    "slug": "edgeguard-5g",
+    "title": "EdgeGuard-5G",
+    "description": "High-performance edge monitoring system for 5G Radio Access Networks (RAN) with automated self-healing.",
+    "published": true,
+    "body": {
+      "raw": "\n## Project Overview\n\nDeveloped a high-performance edge monitoring system for 5G Radio Access Networks using C++ and TensorFlow.\n\n### Technical Achievements\n\n*   **Synthetic Data Pipeline:** Engineered a pipeline to simulate 1 million rows of 5G telemetry, incorporating variables such as SNR, Power Wattage, and Hardware Temperature.\n*   **Automated Self-Healing:** Built a protocol that triggers frequency shifts and power scaling based on a **95.4% accurate predictive model**, significantly reducing potential network downtime.\n*   **Exploratory Data Analysis (EDA):** Identified a 0.65 correlation between power consumption spikes and antenna failure states, enabling proactive maintenance.\n\n### Technologies Used\n\n*   **Languages:** C++, Python\n*   **Frameworks:** TensorFlow, Keras, TFLite, Scikit-learn\n"
+    },
+    "date": "2026-04-01T00:00:00.000Z",
+    "repository": "toshalkumbhar8979-design/EdgeGuard-5G"
+  },
+  {
+    "slug": "ember-gpu",
+    "title": "EMBER GPU",
+    "description": "A GPU designed from scratch: custom rasterization, floating-point, tensor, and compute hardware, verified in simulation and taken through routed SkyWater 130 nm layouts.",
+    "published": true,
+    "body": {
+      "raw": "\n## Project Overview\n\nI built a GPU from scratch. Not a simulation of a GPU — an actual chip design: my own rasterizer, my own floating-point unit, my own instruction set, and my own tensor core. The RTL runs graphics and inference demos in simulation, and several blocks now have routed, DRC-checked GDS layouts.\n\nThe entire project was built on one Windows/WSL machine using an open-source toolchain.\n\n![EMBER GPU architecture diagram](/projects/ember-gpu/architecture.png)\n\n## Hardware Architecture\n\n* **Command processor:** A command processor with DMA and fences, driving everything through one AXI4-Lite bus.\n* **Rasterizer:** A multi-cycle rasterizer with a Z-buffer, CLUT textures, alpha blending, and dithering — the whole PS1-era output stage implemented in logic.\n* **Vector FPU:** A four-lane IEEE-754 fp32 vector FPU written from the gates up, with round-to-nearest-even, subnormal, and NaN handling. Getting the rounding modes right took two weeks and taught me more about floating point than any course.\n* **Tensor core:** A 16×16 int8 systolic tensor array that runs a real CNN. A trained LeNet reads an actual MNIST digit and names it, reaching 98% accuracy, with RTL byte-for-byte identical to the software model.\n* **Compute core:** A four-thread compute core with its own 32-bit ISA and assembler runs the game's physics. The camera walking through the temple is integrated every frame by instructions the GPU executes itself.\n\n## Verification\n\nThe verification suite passes 31/31 tests against independent Python golden models, bit-exact — every pixel and every byte of every layer.\n\n## RTL to GDS-II\n\nThe RTL-to-layout flow uses sv2v, Yosys, OpenROAD, Magic, and KLayout on the open SkyWater 130 nm process. The blocks go through floorplanning, placement, clock-tree synthesis, detailed routing, design-rule checking, and GDS-II export, producing real polygons a foundry tool can open.\n\n## Project Documentation\n\nSource code and project updates are available on [GitHub](https://github.com/toshalkumbhar8979-design). Project images and routed-layout views will be added to the gallery as they are ready.\n"
+    },
+    "date": "2026-10-08T00:00:00.000Z",
+    "repository": "toshalkumbhar8979-design"
+  },
+  {
+    "slug": "fifo-buffer",
+    "title": "FPGA-Based FIFO Buffer with Display Interface",
+    "description": "16-deep FSM-controlled FIFO memory module with a 7-segment display controller for real-time monitoring.",
+    "published": true,
+    "body": {
+      "raw": "\n## Project Overview\n\nEngineered a 16-deep FSM-controlled FIFO memory module in Verilog HDL on Basys 3 with a hardware 7-segment display controller for real-time data-flow monitoring.\n\n### Technical Details\n\n*   **FSM Control:** Managed data flow and display states using a robust Finite State Machine.\n*   **Hardware Interface:** Designed a 7-segment display controller to visualize buffer status and data.\n*   **Robust Testing:** Designed and executed manual hardware test cases; debugged signal timing issues and implemented signal debouncing.\n*   **Applicability:** Structured testing approach applicable to ROS 2 node validation and rqt/RViz log analysis.\n\n### Hardware & Tools\n\n*   **FPGA:** Artix-7 (Basys 3)\n*   **HDL:** Verilog HDL\n*   **Software:** Xilinx Vivado\n"
+    },
+    "date": "2026-03-01T00:00:00.000Z",
+    "repository": "toshalkumbhar8979-design/Fifo_With_Display_On_Basys_3"
+  },
+  {
+    "slug": "ibvs-robotic-arm",
+    "title": "IBVS-Based Robotic Arm Sorting System",
+    "description": "Embedded Control & Real-Time Systems project using image-based visual servoing for autonomous robotic sorting.",
+    "published": true,
+    "body": {
+      "raw": "\n## Project Overview\n\nCo-authored a research paper on an autonomous robotic arm sorting system selected for publication on IEEE Xplore, developed from February 2026 to June 2026.\n\n### Contributions\n\n* Designed an autonomous sorting system using Image-Based Visual Servoing (IBVS) on a Raspberry Pi 5, achieving 15-20 FPS real-time object tracking with under 150 ms processing latency per frame.\n* Developed a camera-driven closed-loop feedback control system for real-time positioning without requiring inverse kinematics.\n* Interfaced an Arduino with servo motors for robotic manipulation and pick-and-place operations, demonstrating sensor-actuator integration."
+    },
+    "date": "2026-02-01T00:00:00.000Z"
+  },
+  {
+    "slug": "imitation-learning-robotic-arm",
+    "title": "Imitation Learning-Based Autonomous Robotic Arm",
+    "description": "Robotic actuation, kinematics, and imitation learning platform with a real-time digital twin and ROS 2 integration.",
+    "published": true,
+    "body": {
+      "raw": "\n## Project Overview\n\nEngineered a custom 6-DOF robotic manipulator from June 2026, driven by an Arduino Uno and PCA9685 PWM driver over I2C.\n\n### Contributions\n\n* Implemented a 115200-baud binary serial protocol with a 500 ms watchdog for fail-safe actuation.\n* Built a FastAPI and WebSockets control system streaming at 30 Hz, with a 3D URDF digital twin and live switching between Cartesian inverse kinematics and direct joint control.\n* Applied an EMA low-pass filter with S-curve cosine velocity interpolation to guarantee zero-jerk motion across all six servo axes.\n* Recorded and exported 250+ teleoperated demonstration episodes through a PS5 DualSense controller for PyTorch behavior-cloning imitation learning.\n* Extended the system with ROS 2, MoveIt, and Gazebo for live remote control of the physical arm through its simulated digital twin."
+    },
+    "date": "2026-06-01T00:00:00.000Z",
+    "repository": "toshalkumbhar8979-design/Robotic-Arm"
+  },
+  {
+    "slug": "iot-gateway",
+    "title": "Smart IoT Edge Gateway Platform",
+    "description": "MQTT-based edge gateway performing real-time statistical anomaly detection on IoT sensor telemetry.",
+    "published": true,
+    "body": {
+      "raw": "\n## Project Overview\n\nDesigned an MQTT-based edge gateway performing real-time statistical anomaly detection (rolling-window z-score) on simulated IoT sensor telemetry, avoiding the cost of streaming raw data to the cloud.\n\n### Key Innovations\n\n*   **Traffic Reduction:** Cut cloud-bound traffic by **~80%** by forwarding only aggregated summaries and anomaly events instead of raw readings.\n*   **Offline Persistence:** Implemented thread-safe local SQLite persistence as an offline buffer for reliable data handling.\n*   **Live Dashboard:** Built a Flask + Chart.js dashboard for live visualisation; injected anomalies were detected and surfaced within seconds.\n\n### Skills Applied\n\n*   **Communication:** MQTT\n*   **Backend:** Python, Flask, SQLite\n*   **Frontend:** Chart.js\n"
+    },
+    "date": "2026-06-01T00:00:00.000Z",
+    "repository": "toshalkumbhar8979-design/Smart-IoT-Edge-Gateway"
+  },
+  {
+    "slug": "loomcode",
+    "title": "LoomCode",
+    "description": "AI coding agent for the terminal with 180+ models, a 60fps SolidJS terminal UI, and a vision-driven desktop-control layer.",
+    "published": true,
+    "body": {
+      "raw": "\n## Project Overview\n\nDesigned and built LoomCode, a production-ready AI coding agent for the terminal with a multi-provider engine supporting Anthropic, OpenAI-compatible providers, NVIDIA NIM, Gemini, and Ollama across 180+ models. Providers can be switched mid-session while streaming tool loops, subagent delegation, and MCP server integrations continue running.\n\n### Terminal Experience\n\n* Built a custom terminal UI from scratch with SolidJS and OpenTUI, using a 60fps renderer.\n* Added slash commands, inline diffs, plan/build/chat modes, a command palette, and mouse support.\n\n### Loom Computer\n\n* Shipped a vision-driven desktop-control layer using the LOOK, THINK, ACT, VERIFY agent loop.\n* Added screen understanding for vision and non-vision models, input injection, blue-ripple action visualisation, and safety rails including a panic hotkey, password-manager blocking, action caps, a stuck watchdog, and a full audit trail.\n\n### Production Readiness\n\n* Implemented per-tool and path-glob permission controls with allow, ask, and deny modes.\n* Added commit-pinned remote skills, budget and cost tracking, and 221 automated tests gating every push.\n* Published to npm with a bundled Bun runtime for zero-setup installation:\n\n```bash\nnpm install -g loom-agent\n```"
+    },
+    "url": "https://loomcluster.in",
+    "repository": "toshalkumbhar8979-design/loomcode"
+  },
+  {
+    "slug": "noise-cancellation",
+    "title": "Adaptive Noise Cancellation System (DSP)",
+    "description": "Implementation of a 128-tap LMS adaptive filter for high-performance signal processing.",
+    "published": true,
+    "body": {
+      "raw": "\n## Project Overview\n\nImplemented a 128-tap LMS adaptive filter (µ = 0.01) achieving 4.14 dB SNR improvement, reducing interference power from 0.000693 to 0.000267.\n\n### Key Performance\n\n*   **SNR Improvement:** 4.14 dB.\n*   **Interference Reduction:** Significant reduction in interference power metrics.\n*   **Methodology:** Signal processing methodology applicable to LiDAR/IMU noise filtering in robotic perception pipelines.\n\n### Environment & Tools\n\n*   **Language:** Python\n*   **Algorithms:** Least Mean Squares (LMS)\n*   **Libraries:** Librosa, Matplotlib, Google Colab\n"
+    },
+    "date": "2026-03-15T00:00:00.000Z",
+    "repository": "toshalkumbhar8979-design/Adaptive-Noise-Cancellation-LMS"
+  },
+  {
+    "slug": "resume",
+    "title": "Professional Resume",
+    "description": "Toshal Kumbhar's latest resume showcasing engineering expertise in ECE, Robotics, and FPGA design.",
+    "published": true,
+    "body": {
+      "raw": "\n## Resume Overview\n\nB.Tech student in Electronics and Communication Engineering at MIT World Peace University with a focus on Automation, Robotics, and Embedded Systems.\n\n### Contact Information\n- **Phone:** +91-8446268979\n- **Email:** toshalkumbhar@gmail.com\n- **LinkedIn:** [toshalkumbhar](https://in.linkedin.com/in/toshalkumbhar)\n- **GitHub:** [toshalkumbhar8979-design](https://github.com/toshalkumbhar8979-design)\n\n### Education\n*   **B.Tech in ECE**, MIT World Peace University, Pune (Expected 2027)\n*   **CGPA:** 7.48\n\n### Technical Skills\n*   **Languages:** Python, C++, Embedded C, Verilog HDL\n*   **Tools:** Git/GitHub, Xilinx Vivado, Raspberry Pi, Arduino\n*   **Frameworks:** OpenCV, TensorFlow, Scikit-learn\n*   **Protocols:** CAN, I2C, PLC, HMI, FPGA (Artix-7)\n"
+    },
+    "date": "2026-07-07T00:00:00.000Z",
+    "url": "https://drive.google.com/file/d/1UdPmMJWjZQsbUlEhbsmw0hzD2FLkXtxT/view?usp=sharing"
+  },
+  {
+    "slug": "riscv-doom-soc",
+    "title": "RISC-V RV32IM SoC with RTL to GDS-II Sign-off",
+    "description": "A complete open RISC-V system-on-chip designed, verified, and taken through a DRC-clean GDS-II layout on SkyWater 130 nm.",
+    "published": true,
+    "body": {
+      "raw": "\n## Project Overview\n\nDesigned a RISC-V RV32IM system-on-chip from scratch, including a 2-stage pipelined core with the M-extension, CSRs, interrupts, and a complete peripheral set. The SoC boots software from QSPI flash and provides a DOOM-compatible platform, then passes through the complete OpenLane 2 physical-design flow on SkyWater 130 nm.\n\n## Key Highlights\n\n*   **RV32IM Core:** Built a Verilog-2001 2-stage pipeline with multiply/divide, CSR and trap/mret support, and timer interrupts. Self-checking testbenches pass both the core and M-extension unit tests.\n*   **SoC Integration:** Connected BootROM, 32 KB SRAM, QSPI flash XIP, SPI-TFT (ILI9341), UART, and mtime/mtimecmp. The end-to-end SoC test passes boot, flash copy, display pattern, timer IRQ, and PASS mailbox checks.\n*   **Software Stack:** Built the GNU RISC-V cross-compiler flow, linker script, crt0, platform HAL, and `doomgeneric` bindings for a C demo that boots and runs on the SoC.\n*   **RTL to GDS-II:** Ran synthesis, placement, CTS, routing, DRC, LVS, and GDS-II export with OpenLane 2 and the volare SkyWater 130 nm PDK. The probe design closed with 0 DRC violations, 0 LVS mismatches, timing met at 20 ns, 18,267 cells, 0.28 mm² area, 8.3 mW power, and +8.8 ns setup slack.\n*   **Full-SoC Synthesis:** Reached 68,690 cells and 0.916 mm², with 43% sequential logic, through CTS with 1,952 clock subnets and WNS of 0.\n\n## Technology Stack\n\nVerilog, RISC-V, Icarus Verilog, GNU RISC-V toolchain, Yosys, OpenROAD, OpenLane 2, SkyWater 130 nm, Magic, KLayout, Netgen, QSPI, UART, SPI-TFT, and WSL2.\n\n## Project Documentation\n\n[Read the project paper](https://drive.google.com/file/d/1LuWkrK-gQlqWzloCvj7BRWznMQ1FX8mW/view?usp=sharing)\n\n## Further Work\n\nOpenRAM hard-macro integration for the SRAM, full-corner timing closure, and FPGA board bring-up."
+    },
+    "date": "2026-08-22T00:00:00.000Z",
+    "repository": "toshalkumbhar8979-design/RISC-V-RV32IM-SoC-"
+  },
+  {
+    "slug": "riscv-processor",
+    "title": "RISC-V (RV32I) 3-Stage Pipelined Processor",
+    "description": "Synthesisable RV32I 3-stage pipeline processor designed for Artix-7 FPGA (Basys 3).",
+    "published": true,
+    "body": {
+      "raw": "\n## Project Overview\n\nDesigned a synthesisable RV32I 3-stage pipeline (Fetch/Decode/Execute) for Artix-7 FPGA.\n\n### Technical Specifications\n\n*   **Timing Closure:** Achieved WNS 14.42 ns and WHS 0.168 ns.\n*   **Power Profile:** 0.076 W via Vivado Power Analyzer.\n*   **Hardware Debugging:** Built a 16-bit register-to-LED ALU debug mapping for hardware-level validation.\n*   **Optimization:** Resolved logic pruning and LUT resource drop-off (21 → 300+) using `DONT_TOUCH` constraints.\n\n### Tools Used\n\n*   **HDL:** Verilog HDL\n*   **Platform:** Xilinx Vivado, Artix-7 FPGA (Basys 3)\n"
+    },
+    "date": "2026-01-15T00:00:00.000Z",
+    "repository": "toshalkumbhar8979-design/RISC-V-RV32I-Mini-Core"
+  },
+  {
+    "slug": "sensor-interface-telemetry",
+    "title": "Sensor Interface & Telemetry Logging Framework",
+    "description": "Modular microcontroller firmware, binary telemetry logging, and offline analysis tools for sensor bring-up and validation.",
+    "published": true,
+    "body": {
+      "raw": "\n## Project Overview\n\nBuilt a modular C/C++ firmware and analysis framework for interfacing sensors, streaming telemetry, and validating control logic during hardware bring-up.\n\n### Peripheral Drivers & Telemetry\n\n*   **Sensor Interfaces:** Connected proximity, optical, and IMU-class sensors over I2C and UART with configurable sampling and non-blocking reads.\n*   **Binary Logging:** Implemented a lightweight telemetry logger that streamed timestamped sensor data and status flags to a host over serial for live monitoring and offline post-processing.\n*   **Offline Analysis:** Wrote Python tools to parse field-style logs, compute statistics, detect anomalies, and visualize trends during bring-up and validation.\n*   **Software-in-the-Loop Testing:** Added harnesses that replayed recorded logs against control logic to verify edge-case handling and fault containment without physical hardware.\n\n### Skills Applied\n\n*   **Firmware:** C, C++, microcontroller peripherals\n*   **Communication:** I2C, UART, serial telemetry\n*   **Analysis:** Python, statistical analysis, anomaly detection, data visualization\n"
+    },
+    "date": "2026-03-01T00:00:00.000Z"
+  }
+]

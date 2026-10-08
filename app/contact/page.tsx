@@ -36,6 +36,7 @@ export default function Example() {
 							<Link
 								href={s.href}
 								target="_blank"
+								rel="noopener noreferrer"
 								className="p-4 relative flex flex-col items-center gap-4 duration-700 group md:gap-8 md:py-24  lg:pb-48  md:p-16"
 							>
 								<span

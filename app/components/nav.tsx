@@ -50,7 +50,7 @@ export const Navigation: React.FC<NavigationProps> = ({ showCredits = false }) =
 						<Link
 							href="https://drive.google.com/file/d/1UdPmMJWjZQsbUlEhbsmw0hzD2FLkXtxT/view?usp=sharing"
 							target="_blank"
-							rel="noreferrer"
+							rel="noopener noreferrer"
 							className="duration-200 text-zinc-400 hover:text-zinc-100"
 						>
 							Resume
@@ -90,7 +90,7 @@ export const Navigation: React.FC<NavigationProps> = ({ showCredits = false }) =
 											<Link
 												href="https://github.com/chronark/chronark.com"
 												target="_blank"
-												rel="noreferrer"
+												rel="noopener noreferrer"
 												className="text-white underline underline-offset-4 hover:text-zinc-400"
 											>
 												Chronark template

@@ -60,7 +60,7 @@ export function PortfolioChatClient() {
 	const inputRef = useRef<HTMLInputElement>(null);
 	const messageListRef = useRef<HTMLDivElement>(null);
 	const positionClass = isHomePage
-		? "left-36 top-14 sm:left-[9.5rem] sm:top-14"
+		? "left-3 top-36 sm:left-[9.5rem] sm:top-14"
 		: "bottom-5 right-5 sm:bottom-8 sm:right-8";
 
 	useEffect(() => {
@@ -138,22 +138,25 @@ export function PortfolioChatClient() {
 				<section
 					role="region"
 					aria-label="Portfolio Q and A"
-					className={`flex w-[min(22rem,calc(100vw-2.5rem))] flex-col overflow-hidden rounded-xl border border-zinc-700 bg-zinc-950/95 text-zinc-100 shadow-2xl shadow-black/40 backdrop-blur ${
+					className={`flex w-[min(22rem,calc(100vw-1.5rem))] flex-col overflow-hidden rounded-[1.25rem] border border-sky-900 bg-[#111820] p-1 font-mono text-sky-100 shadow-[0_0_0_1px_#05080c,0_0_24px_rgba(56,189,248,0.16)] sm:w-[min(22rem,calc(100vw-2.5rem))] ${
 						isHomePage ? "max-h-[calc(100dvh-12rem)]" : "max-h-[min(72vh,38rem)]"
 					}`}
 				>
-					<header className="flex items-center justify-between border-b border-zinc-800 px-4 py-3">
+					<header className="flex items-center justify-between rounded-t-[1rem] border-b border-sky-950 bg-[#111820] px-3 py-2.5">
 						<div className="flex items-center gap-3">
 							<CrtAvatar />
 							<div>
-								<h2 className="text-sm font-semibold text-zinc-100">Ask about my portfolio</h2>
-								<p className="mt-0.5 text-xs text-zinc-500">Answers are found in this site</p>
+								<h2 className="text-xs font-bold uppercase tracking-[0.12em] text-sky-200">Portfolio Terminal</h2>
+								<p className="mt-0.5 flex items-center gap-1.5 text-[0.65rem] uppercase tracking-wider text-sky-400">
+									<span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-sky-400 shadow-[0_0_6px_rgba(56,189,248,0.85)]" />
+									Ready for input
+								</p>
 							</div>
 						</div>
 						<button
 							type="button"
 							onClick={() => setIsOpen(false)}
-							className="rounded-full p-2 text-zinc-400 transition-colors hover:bg-zinc-800 hover:text-white focus:outline-none focus:ring-2 focus:ring-zinc-400"
+							className="rounded-md p-2 text-sky-400 transition-colors hover:bg-sky-950 hover:text-sky-200 focus:outline-none focus:ring-2 focus:ring-sky-500"
 							aria-label="Close portfolio chat"
 						>
 							<X size={18} />
@@ -164,7 +167,7 @@ export function PortfolioChatClient() {
 						ref={messageListRef}
 						aria-live="polite"
 						aria-busy={isThinking}
-						className="flex min-h-28 max-h-[calc(72vh-8rem)] flex-col gap-3 overflow-y-auto p-4"
+						className="crt-chat-screen flex min-h-28 max-h-[calc(72vh-8rem)] flex-col gap-3 overflow-y-auto rounded-md px-3 py-4 sm:px-4"
 					>
 						{messages.map((message) => (
 							<div
@@ -177,24 +180,24 @@ export function PortfolioChatClient() {
 								<div
 									className={`min-w-0 rounded-lg px-3 py-2 text-sm leading-6 ${
 										message.role === "user"
-											? "bg-zinc-800 text-zinc-100"
+											? "border border-amber-900/70 bg-[#17140b]/90 text-amber-100"
 											: message.isError
-												? "bg-rose-950/60 text-rose-200"
-												: "bg-zinc-900 text-zinc-300"
+												? "border border-rose-900/70 bg-rose-950/80 text-rose-200"
+												: "border border-sky-950 bg-[#071018]/80 text-sky-100 shadow-[inset_0_0_12px_rgba(56,189,248,0.045)]"
 									}`}
 								>
 									<p>{message.text}</p>
 									{message.results?.map((result) => (
-										<article key={`${message.id}-${result.slug}`} className="mt-3 border-t border-zinc-700 pt-2">
+										<article key={`${message.id}-${result.slug}`} className="mt-3 border-t border-sky-950 pt-2">
 											<Link
 												href={`/projects/${result.slug}`}
-												className="inline-flex items-center gap-1 font-medium text-zinc-100 underline decoration-zinc-600 underline-offset-4 hover:decoration-zinc-200"
+													className="inline-flex items-center gap-1 font-bold text-sky-300 underline decoration-sky-900 underline-offset-4 hover:text-sky-100 hover:decoration-sky-300 focus:outline-none focus:ring-2 focus:ring-sky-500"
 											>
 												{result.title}
 												<ArrowUpRight size={14} aria-hidden="true" />
 											</Link>
 											{message.text !== result.excerpt && (
-												<p className="mt-1 text-xs leading-5 text-zinc-400">{result.excerpt}</p>
+												<p className="mt-1 text-xs leading-5 text-sky-100/75">{result.excerpt}</p>
 											)}
 										</article>
 									))}
@@ -203,7 +206,7 @@ export function PortfolioChatClient() {
 						))}
 					</div>
 
-					<form onSubmit={sendQuestion} className="flex items-center gap-2 border-t border-zinc-800 p-3">
+					<form onSubmit={sendQuestion} className="flex items-center gap-2 rounded-b-[1rem] border-t border-sky-950 bg-[#111820] p-2.5">
 						<input
 							ref={inputRef}
 							value={question}
@@ -212,12 +215,12 @@ export function PortfolioChatClient() {
 							maxLength={400}
 							placeholder="Ask about projects or skills..."
 							aria-label="Ask a question about the portfolio"
-							className="min-w-0 flex-1 rounded-lg border border-zinc-700 bg-zinc-900 px-3 py-2 text-sm text-zinc-100 outline-none placeholder:text-zinc-500 focus:border-zinc-500 focus:ring-1 focus:ring-zinc-500"
+							className="min-w-0 flex-1 rounded-md border border-sky-950 bg-[#050b10] px-3 py-2 text-xs text-sky-100 outline-none placeholder:text-sky-500 focus:border-sky-700 focus:ring-1 focus:ring-sky-700"
 						/>
 						<button
 							type="submit"
 							disabled={!question.trim() || isThinking}
-							className="rounded-lg border border-zinc-700 bg-zinc-800 p-2 text-zinc-200 transition-colors hover:bg-zinc-700 disabled:cursor-not-allowed disabled:opacity-40 focus:outline-none focus:ring-2 focus:ring-zinc-400"
+							className="rounded-md border border-sky-900 bg-sky-950/70 p-2 text-sky-300 transition-colors hover:bg-sky-900 hover:text-sky-100 disabled:cursor-not-allowed disabled:opacity-40 focus:outline-none focus:ring-2 focus:ring-sky-500"
 							aria-label="Search portfolio"
 						>
 							<Send size={18} />
@@ -230,7 +233,7 @@ export function PortfolioChatClient() {
 					onClick={() => setIsOpen(true)}
 					aria-expanded={false}
 					aria-label="Open portfolio Q and A"
-					className={`relative flex w-max max-w-[calc(100vw-9rem)] items-center justify-center rounded-2xl border border-zinc-700 bg-zinc-950 px-3 py-2.5 text-center text-xs font-medium leading-4 text-zinc-200 shadow-lg shadow-black/30 transition-colors hover:border-zinc-500 hover:bg-zinc-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-zinc-400 before:absolute before:-left-2 before:top-1/2 before:-translate-y-1/2 before:border-y-[0.45rem] before:border-y-transparent before:border-r-[0.55rem] before:border-r-zinc-700 before:content-[''] after:absolute after:-left-[0.35rem] after:top-1/2 after:-translate-y-1/2 after:border-y-[0.35rem] after:border-y-transparent after:border-r-[0.45rem] after:border-r-zinc-950 after:content-[''] ${
+					className={`relative flex w-max max-w-[calc(100vw-9rem)] items-center justify-center rounded-lg border border-sky-900 bg-[#071018] px-3 py-2.5 text-center font-mono text-xs font-medium leading-4 text-sky-200 shadow-[0_0_12px_rgba(56,189,248,0.14)] transition-colors hover:border-sky-600 hover:text-sky-100 focus:outline-none focus:ring-2 focus:ring-sky-500 before:absolute before:-left-2 before:top-1/2 before:-translate-y-1/2 before:border-y-[0.45rem] before:border-y-transparent before:border-r-[0.55rem] before:border-r-sky-900 before:content-[''] after:absolute after:-left-[0.35rem] after:top-1/2 after:-translate-y-1/2 after:border-y-[0.35rem] after:border-y-transparent after:border-r-[0.45rem] after:border-r-[#071018] after:content-[''] ${
 						isHomePage ? "min-h-11" : ""
 					}`}
 				>
