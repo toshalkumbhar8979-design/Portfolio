@@ -193,7 +193,9 @@ export function PortfolioChatClient() {
 												{result.title}
 												<ArrowUpRight size={14} aria-hidden="true" />
 											</Link>
-											<p className="mt-1 text-xs leading-5 text-zinc-400">{result.excerpt}</p>
+											{message.text !== result.excerpt && (
+												<p className="mt-1 text-xs leading-5 text-zinc-400">{result.excerpt}</p>
+											)}
 										</article>
 									))}
 								</div>

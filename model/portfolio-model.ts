@@ -27,10 +27,10 @@ type Passage = {
 
 const STOP_WORDS = new Set([
 	"a", "about", "an", "and", "are", "can", "did", "do", "does", "for", "from",
-	"give", "he", "her", "his", "how", "i", "in", "is", "it", "me", "my", "of",
+	"done", "give", "have", "he", "her", "his", "how", "i", "in", "is", "it", "kind", "me", "my", "of",
 	"on", "or", "please", "tell", "that", "the", "their", "them", "there", "they",
 	"this", "to", "was", "what", "when", "where", "which", "who", "why", "with",
-	"you", "your", "yourself",
+	"work", "you", "your", "yourself",
 ]);
 
 const MINIMUM_SIMILARITY = 0.16;
@@ -40,6 +40,12 @@ const GREETING_SMALL_TALK = new Set(["are", "doing", "good", "how", "morning", "
 function tokenize(text: string) {
 	return (text.toLowerCase().match(/[a-z0-9+#]{2,}/g) ?? [])
 		.filter((term) => !STOP_WORDS.has(term));
+}
+
+function singularize(term: string) {
+	if (term.length > 4 && term.endsWith("ies")) return `${term.slice(0, -3)}y`;
+	if (term.length > 4 && term.endsWith("s") && !term.endsWith("ss")) return term.slice(0, -1);
+	return term;
 }
 
 function editDistance(left: string, right: string) {
@@ -56,6 +62,26 @@ function editDistance(left: string, right: string) {
 		previous.splice(0, previous.length, ...current);
 	}
 	return previous[right.length];
+}
+
+function correctQueryTerm(term: string, vocabulary: Set<string>) {
+	const normalized = singularize(term);
+	if (vocabulary.has(normalized)) return normalized;
+	if (normalized.length < 5) return normalized;
+
+	let closest: string | undefined;
+	let bestDistance = 2;
+	for (const candidate of Array.from(vocabulary)) {
+		if (Math.abs(candidate.length - normalized.length) > 1) continue;
+		const distance = editDistance(normalized, candidate);
+		if (distance < bestDistance) {
+			closest = candidate;
+			bestDistance = distance;
+			if (distance === 1) break;
+		}
+	}
+
+	return closest ?? normalized;
 }
 
 function isGreeting(question: string) {
@@ -120,13 +146,15 @@ function createPassages(project: PortfolioDocument) {
 export function trainPortfolioModel(projects: PortfolioDocument[]) {
 	const passages = projects.flatMap(createPassages);
 	const documentFrequency = new Map<string, number>();
+	const vocabulary = new Set<string>();
 
 	for (const passage of passages) {
-		for (const term of Array.from(new Set(tokenize(passage.text)))) {
+		for (const term of Array.from(new Set(tokenize(passage.text).map(singularize)))) {
+			vocabulary.add(term);
 			documentFrequency.set(term, (documentFrequency.get(term) ?? 0) + 1);
 		}
 		passage.frequencies = new Map();
-		for (const term of tokenize(passage.text)) {
+		for (const term of tokenize(passage.text).map(singularize)) {
 			passage.frequencies.set(term, (passage.frequencies.get(term) ?? 0) + 1);
 		}
 	}
@@ -153,7 +181,9 @@ export function trainPortfolioModel(projects: PortfolioDocument[]) {
 				if (profile.length) {
 					const excerpt = profile.map((passage) => passage.text).join(" ");
 					return {
-						message: "I’m a portfolio assistant for Toshal Kumbhar. Here’s a short profile from his resume:",
+						message: /\b(name)\b/.test(question.toLowerCase())
+							? "Your name is Toshal Kumbhar."
+							: "I’m a portfolio assistant for Toshal Kumbhar. Here’s a short profile from his resume:",
 						results: [{
 							slug: profile[0].slug,
 							title: profile[0].title,
@@ -172,7 +202,7 @@ export function trainPortfolioModel(projects: PortfolioDocument[]) {
 				};
 			}
 
-			const terms = tokenize(question);
+			const terms = tokenize(question).map((term) => correctQueryTerm(term, vocabulary));
 			const knownTerms = Array.from(new Set(terms))
 				.filter((term) => documentFrequency.has(term));
 
@@ -180,6 +210,21 @@ export function trainPortfolioModel(projects: PortfolioDocument[]) {
 				return {
 					message: "I’m a portfolio-only assistant, so I can answer questions about Toshal’s projects, skills, and experience. I couldn’t find information about that here.",
 					results: [],
+				};
+			}
+
+			if (knownTerms.length === 1 && knownTerms[0] === "project") {
+				const overview = projects
+					.filter((project) => project.slug !== "resume" && !project.slug.startsWith("cert-"))
+					.slice(0, 4)
+					.map((project) => ({
+						slug: project.slug,
+						title: project.title,
+						excerpt: project.description,
+					}));
+				return {
+					message: `Here are ${overview.length} projects from the portfolio:`,
+					results: overview,
 				};
 			}
 
@@ -226,7 +271,7 @@ export function trainPortfolioModel(projects: PortfolioDocument[]) {
 
 			return {
 				message: results.length
-					? "Here’s what I found in the portfolio:"
+					? results[0].excerpt
 					: "I’m a portfolio-only assistant, so I can answer questions about Toshal’s projects, skills, and experience. I couldn’t find information about that here.",
 				results,
 			};
