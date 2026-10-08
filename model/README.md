@@ -8,7 +8,9 @@ It does not use pretrained weights, an external AI service, or generated
 answers. The small index is created in the server runtime from published
 Contentlayer documents and is not exposed as a public model download. It stays
 well below 100 MB because it consists only of the portfolio text and sparse
-term weights.
+term weights. Matching is data-driven TF-IDF retrieval rather than a list of
+prewritten answers; greeting and owner-profile handling provide basic
+conversation around those portfolio searches.
 
 The model is intentionally a retriever, not a language model: portfolio text
 alone is not enough to train a reliable generative LLM from scratch. Queries
