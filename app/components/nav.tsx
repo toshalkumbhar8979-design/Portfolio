@@ -48,14 +48,6 @@ export const Navigation: React.FC<NavigationProps> = ({ showCredits = false }) =
 				<div className="container flex flex-row-reverse items-center justify-between p-6 mx-auto">
 					<div className="flex justify-between gap-8">
 						<Link
-							href="https://drive.google.com/file/d/1UdPmMJWjZQsbUlEhbsmw0hzD2FLkXtxT/view?usp=sharing"
-							target="_blank"
-							rel="noopener noreferrer"
-							className="duration-200 text-zinc-400 hover:text-zinc-100"
-						>
-							Resume
-						</Link>
-						<Link
 							href="/projects"
 							className="duration-200 text-zinc-400 hover:text-zinc-100"
 						>
@@ -90,7 +82,7 @@ export const Navigation: React.FC<NavigationProps> = ({ showCredits = false }) =
 											<Link
 												href="https://github.com/chronark/chronark.com"
 												target="_blank"
-												rel="noopener noreferrer"
+												rel="noreferrer"
 												className="text-white underline underline-offset-4 hover:text-zinc-400"
 											>
 												Chronark template

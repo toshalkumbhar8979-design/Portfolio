@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { allProjects } from "@/lib/projects";
+import { allProjects } from "contentlayer/generated";
 import { Mdx } from "@/app/components/mdx";
 import { Header } from "./header";
 import "./mdx.css";
@@ -13,9 +13,7 @@ type Props = {
 
 export default async function PostPage({ params }: Props) {
   const { slug } = await params;
-  const project = allProjects.find(
-    (project) => project.slug === slug && project.published,
-  );
+  const project = allProjects.find((project) => project.slug === slug);
 
   if (!project) {
     notFound();

@@ -1,4 +1,4 @@
-import type { Project } from "@/lib/projects";
+import type { Project } from "@/.contentlayer/generated";
 import Link from "next/link";
 
 type Props = {
@@ -20,7 +20,7 @@ export const Article: React.FC<Props> = ({ project }) => {
 								)}
 							</time>
 						) : (
-							<span>{project.slug === "loomcode" ? "LIVE" : "SOON"}</span>
+							<span>SOON</span>
 						)}
 					</span>
 				</div>

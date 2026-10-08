@@ -1,12 +1,12 @@
 import Link from "next/link";
 import React from "react";
-import { allProjects } from "@/lib/projects";
+import { allProjects } from "contentlayer/generated";
 import { Navigation } from "../components/nav";
 import { Card } from "../components/card";
 import { Article } from "./article";
 
 export default async function ProjectsPage() {
-  const featured = allProjects.find((project) => project.slug === "ember-gpu") || allProjects[0];
+  const featured = allProjects.find((project) => project.slug === "loomcode") || allProjects[0];
   const top2 = allProjects.find((project) => project.slug === "edgeguard-5g") || allProjects[1];
   const top3 = allProjects.find((project) => project.slug === "riscv-doom-soc") || allProjects[2];
   
@@ -21,7 +21,6 @@ export default async function ProjectsPage() {
         project.slug !== featured.slug &&
         project.slug !== top2.slug &&
         project.slug !== top3.slug &&
-        project.slug !== "resume" &&
         project.category !== "Industry - Academic Project" &&
         !project.slug.startsWith("cert-"),
     )
