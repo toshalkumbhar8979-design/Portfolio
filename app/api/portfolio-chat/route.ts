@@ -1,7 +1,6 @@
 import { allProjects } from "@/lib/projects";
 import { trainPortfolioModel } from "../../../model/portfolio-model";
 
-export const runtime = "edge";
 const MAX_REQUEST_BODY_BYTES = 8 * 1024;
 
 const model = trainPortfolioModel(
