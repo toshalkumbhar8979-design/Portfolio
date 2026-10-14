@@ -1,35 +1,55 @@
 ---
 title: "EMBER GPU"
-description: "A GPU designed from scratch: custom rasterization, floating-point, tensor, and compute hardware, verified in simulation and taken through routed SkyWater 130 nm layouts."
+description: "A complete GPU SoC designed from scratch in SystemVerilog, verified bit-exact against independent golden models, and taken through routed SkyWater 130 nm layouts."
 repository: "toshalkumbhar8979-design"
 date: "2026-10-08"
 published: true
+tags:
+  - RTL & Hardware
+  - AI & ML
 ---
 
 ## Project Overview
 
-I built a GPU from scratch. Not a simulation of a GPU — an actual chip design: my own rasterizer, my own floating-point unit, my own instruction set, and my own tensor core. The RTL runs graphics and inference demos in simulation, and several blocks now have routed, DRC-checked GDS layouts.
-
-The entire project was built on one Windows/WSL machine using an open-source toolchain.
+A complete GPU system-on-chip designed from scratch in SystemVerilog. It combines a graphics rasterizer, vector floating-point unit, tensor accelerator, and multithreaded compute core on a self-built AMBA AXI4-Lite fabric, with 512 KB of unified memory and a DMA command processor.
 
 ![EMBER GPU architecture diagram](/projects/ember-gpu/architecture.png)
 
-## Hardware Architecture
+## SoC Architecture
 
-* **Command processor:** A command processor with DMA and fences, driving everything through one AXI4-Lite bus.
-* **Rasterizer:** A multi-cycle rasterizer with a Z-buffer, CLUT textures, alpha blending, and dithering — the whole PS1-era output stage implemented in logic.
-* **Vector FPU:** A four-lane IEEE-754 fp32 vector FPU written from the gates up, with round-to-nearest-even, subnormal, and NaN handling. Getting the rounding modes right took two weeks and taught me more about floating point than any course.
-* **Tensor core:** A 16×16 int8 systolic tensor array that runs a real CNN. A trained LeNet reads an actual MNIST digit and names it, reaching 98% accuracy, with RTL byte-for-byte identical to the software model.
-* **Compute core:** A four-thread compute core with its own 32-bit ISA and assembler runs the game's physics. The camera walking through the temple is integrated every frame by instructions the GPU executes itself.
+* **Rasterizer:** A PS1-era graphics pipeline implemented as a multi-cycle FSM, including Z-buffering, CLUT textures, alpha blending, and dithering.
+* **Vector FPU:** A four-lane IEEE-754 fp32 unit supporting round-to-nearest-even, subnormals, and NaN handling.
+* **Tensor unit:** A 16×16 int8 systolic array using TPU-v1-style weight-stationary dataflow.
+* **Compute core:** A four-thread core with a custom 32-bit ISA and a self-written assembler.
+* **System integration:** A self-built AMBA AXI4-Lite fabric connects the blocks to 512 KB unified memory and a DMA command processor.
 
-## Verification
+## Verification & Demonstrations
 
-The verification suite passes 31/31 tests against independent Python golden models, bit-exact — every pixel and every byte of every layer.
+* **RTL regression:** 31/31 cocotb tests pass bit-exactly against independent Python golden models. Modelling truncation and rounding independently caught a tensor-unit row-counter width bug: eight bits could not represent the 688 rows required by a convolution.
+* **Floating point:** The FPU passed 6,720 comparisons with zero mismatches.
+* **CNN inference:** A trained LeNet reached 98% accuracy across 100 MNIST samples through the RTL data path, byte-for-byte matching the software mirror.
+* **Game loop:** A 112-instruction Q16.16 physics kernel runs on the compute core and matches the Python mirror over all 32 demo frames. The final host-rendered frame matches the testbench on all 10,316 pixels.
+* **Scene-level checks:** Renderer tests assert meaningful scene properties—including at least 12 colors, 20,000 non-background pixels, 50 distinct depth values, and frame-to-frame change—and reject degenerate golden output.
 
-## RTL to GDS-II
+## ASIC Implementation
 
-The RTL-to-layout flow uses sv2v, Yosys, OpenROAD, Magic, and KLayout on the open SkyWater 130 nm process. The blocks go through floorplanning, placement, clock-tree synthesis, detailed routing, design-rule checking, and GDS-II export, producing real polygons a foundry tool can open.
+Tcl scripts drive the OpenROAD floorplan, placement, clock-tree synthesis, and global/detailed routing flow with SDC clock constraints. Across 11 blocks, 2,266,911 standard cells were mapped on the SkyWater sky130 process using Yosys, OpenROAD, Magic, and KLayout. Independently audited block layouts have zero DRC violations and timing met with non-negative STA slack.
+
+The core block's physical run is still in progress; this is not a claim of whole-chip tapeout or sign-off. The verified results are bit-exact RTL, multiple zero-DRC blocks, and timing-met routed blocks.
+
+## Performance & Design Decisions
+
+At 100 MHz, the tensor unit sustains 1.57 GOPS against a 51.2 GOPS array peak (about 3% utilization). Profiling traced the gap to a streaming-bound address controller that does not double-buffer operands; an operand-double-buffered streaming controller is the identified next optimization, not a performance result claimed here. The worst demo frame takes about 615,000 cycles: 6.15 ms at 100 MHz or 12.3 ms at 50 MHz.
+
+The SoC deliberately uses one clock domain, eliminating CDC crossings from this design. Multi-clock synchronization techniques such as two-flop synchronizers, Gray-coded pointers, and handshakes are understood as concepts but were not needed in this single-domain implementation.
+
+## Verification Methods & Skills
+
+* **Hands-on:** SystemVerilog/Verilog RTL, multi-cycle FSM and FIFO datapaths, self-built AMBA AXI4-Lite fabric, independent cocotb scoreboards, Python golden models, and a Verilator lint gate (one documented waiver).
+* **Physical design:** Tcl scripting, SDC constraints, STA slack review, Yosys, OpenROAD, OpenLane 2, Magic, and KLayout.
+* **Additional languages and tools:** Python, C++, embedded C, MATLAB, Vivado, and cocotb.
+* **Qualified familiarity:** UVM methodology and SVA concepts; verification was implemented with cocotb rather than UVM, and assertions/coverage closure are not claimed as completed project work.
 
 ## Project Documentation
 
-Source code and project updates are available on [GitHub](https://github.com/toshalkumbhar8979-design). Project images and routed-layout views will be added to the gallery as they are ready.
+The interactive demo combines a real 3D game loop with trained CNN inference. Source code and project updates are available on [GitHub](https://github.com/toshalkumbhar8979-design).

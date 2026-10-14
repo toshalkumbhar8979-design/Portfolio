@@ -36,6 +36,13 @@ export const Project = defineDocumentType(() => ({
 		category: {
 			type: "string",
 		},
+		status: {
+			type: "string",
+		},
+		tags: {
+			type: "list",
+			of: { type: "string" },
+		},
 		date: {
 			type: "date",
 		},

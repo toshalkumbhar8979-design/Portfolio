@@ -6,6 +6,8 @@ export type Project = {
 	description: string;
 	published: boolean;
 	category?: string;
+	status?: string;
+	tags?: string[];
 	date?: string;
 	url?: string;
 	repository?: string;
