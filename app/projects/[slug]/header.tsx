@@ -183,7 +183,7 @@ export const Header: React.FC<Props> = ({ project, slug }) => {
 						</div>
 						<iframe
 							className="aspect-video w-full border-0 bg-zinc-950"
-							src="https://drive.google.com/file/d/1v6YYx8oilNhYG7eOzeoTNrJiH-5SRr5P/preview?autoplay=1"
+							src="https://drive.google.com/file/d/1-EqOtsbg3GOpFEbuJbn7NIMbpZugVGfL/preview?autoplay=1"
 							title="Imitation learning robotic arm project video"
 							allow="autoplay; fullscreen"
 							allowFullScreen
