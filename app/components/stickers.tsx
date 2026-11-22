@@ -22,7 +22,19 @@ type StickerName =
 	| "terminal"
 	| "certificate"
 	| "buffer"
-	| "cpu";
+	| "cpu"
+	| "publication-sorting"
+	| "ibvs-vision"
+	| "imitation"
+	| "blade-inspection"
+	| "doom-console"
+	| "anc-headphones"
+	| "edge-5g"
+	| "fifo-display"
+	| "board-bringup"
+	| "resume"
+	| "telemetry-dashboard"
+	| "cloud";
 
 type StickerPlacement = {
 	name: StickerName;
@@ -69,6 +81,18 @@ const stickers: Record<StickerName, { label: string; src: string }> = {
 	certificate: { label: "Achievement badge", src: "/stickers/certificate.png" },
 	buffer: { label: "FIFO buffer", src: "/stickers/buffer.png" },
 	cpu: { label: "Processor die", src: "/stickers/cpu.png" },
+	"publication-sorting": { label: "Visual servoing sorting cell", src: "/stickers/publication-sorting.png" },
+	"ibvs-vision": { label: "Camera-guided robotic arm", src: "/stickers/ibvs-vision.png" },
+	imitation: { label: "Imitation learning arm", src: "/stickers/imitation.png" },
+	"blade-inspection": { label: "Blade inspection", src: "/stickers/blade-inspection.png" },
+	"doom-console": { label: "Retro gaming console", src: "/stickers/doom-console.png" },
+	"anc-headphones": { label: "Noise-cancelling headphones", src: "/stickers/anc-headphones.png" },
+	"edge-5g": { label: "5G edge node", src: "/stickers/edge-5g.png" },
+	"fifo-display": { label: "FIFO with 7-segment display", src: "/stickers/fifo-display.png" },
+	"board-bringup": { label: "Board bring-up", src: "/stickers/board-bringup.png" },
+	resume: { label: "Resume", src: "/stickers/resume.png" },
+	"telemetry-dashboard": { label: "Telemetry dashboard", src: "/stickers/telemetry-dashboard.png" },
+	cloud: { label: "Cloud certification", src: "/stickers/cloud.png" },
 };
 
 const homeStickers: StickerPlacement[] = [
@@ -194,23 +218,23 @@ const stickersByVariant = {
 };
 
 const projectStickerNames: Record<string, StickerName[]> = {
-	"bharat-forge": ["forge", "pcb"],
-	"board-bring-up-peripheral-validation": ["fpga", "oscilloscope"],
-	"cert-aws": ["certificate", "projects"],
-	"cert-google-adk": ["certificate", "neural-net"],
-	"cert-jj": ["certificate", "projects"],
-	"edgeguard-5g": ["signal", "fpga"],
+	"bharat-forge": ["blade-inspection", "pcb"],
+	"board-bring-up-peripheral-validation": ["board-bringup", "oscilloscope"],
+	"cert-aws": ["certificate", "cloud"],
+	"cert-google-adk": ["certificate", "pcb"],
+	"cert-jj": ["certificate", "resume"],
+	"edgeguard-5g": ["edge-5g", "signal"],
 	"ember-gpu": ["ember-gpu", "chip-stack"],
-	"fifo-buffer": ["buffer", "chip"],
-	"ibvs-robotic-arm": ["robotic-arm", "chip"],
-	"imitation-learning-robotic-arm": ["robotic-arm", "neural-net"],
-	"iot-gateway": ["iot-node", "signal"],
-	loomcode: ["terminal", "pcb"],
-	"noise-cancellation": ["oscilloscope", "signal"],
-	resume: ["projects", "certificate"],
-	"riscv-doom-soc": ["cpu", "gpu"],
-	"riscv-processor": ["cpu", "chip"],
-	"sensor-interface-telemetry": ["iot-node", "oscilloscope"],
+	"fifo-buffer": ["fifo-display", "buffer"],
+	"ibvs-robotic-arm": ["ibvs-vision", "robotic-arm"],
+	"imitation-learning-robotic-arm": ["imitation", "neural-net"],
+	"iot-gateway": ["iot-node", "telemetry-dashboard"],
+	loomcode: ["terminal", "neural-net"],
+	"noise-cancellation": ["anc-headphones"],
+	resume: ["resume", "mail"],
+	"riscv-doom-soc": ["doom-console", "cpu"],
+	"riscv-processor": ["cpu", "fpga"],
+	"sensor-interface-telemetry": ["oscilloscope", "telemetry-dashboard"],
 	default: ["projects", "chip"],
 };
 
