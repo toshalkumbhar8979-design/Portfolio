@@ -2,6 +2,7 @@
 import { ArrowLeft, Github, Globe, X } from "lucide-react";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
+import { ProjectGallery } from "./gallery";
 
 type Props = {
 	slug: string;
@@ -134,6 +135,7 @@ export const Header: React.FC<Props> = ({ project, slug }) => {
 									</span>
 								</button>
 							)}
+							{slug === "ember-gpu" && <ProjectGallery />}
 							{links.map((link) => (
 								<Link
 									target="_blank"

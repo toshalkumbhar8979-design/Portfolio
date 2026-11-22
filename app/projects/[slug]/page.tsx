@@ -4,6 +4,7 @@ import { Mdx } from "@/app/components/mdx";
 import { Header } from "./header";
 import "./mdx.css";
 import { ReportView } from "./view";
+import { ProjectStickers } from "@/app/components/stickers";
 
 type Props = {
   params: Promise<{
@@ -20,7 +21,8 @@ export default async function PostPage({ params }: Props) {
   }
 
   return (
-    <div className="bg-zinc-50 min-h-screen">
+    <div className="relative bg-zinc-50 min-h-screen">
+      <ProjectStickers slug={project.slug} />
       <Header project={project} slug={project.slug} />
       <ReportView slug={project.slug} />
 
