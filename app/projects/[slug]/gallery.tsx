@@ -15,10 +15,6 @@ const figures: Omit<GalleryImage, "src">[] = [
 		caption: "AXI4-Lite fabric, CP, VRAM, GSX, RTR, TPU and core",
 	},
 	{
-		title: "Die shot",
-		caption: "sky130 block detail",
-	},
-	{
 		title: "Routed block layout",
 		caption: "Standard-cell rows, clock tree and routing",
 	},
@@ -82,7 +78,6 @@ const figures: Omit<GalleryImage, "src">[] = [
 
 const files = [
 	"architecture.png",
-	"die_shot.png",
 	"gds_block.png",
 	"gds_cp.png",
 	"doom_ref.png",
